@@ -29,24 +29,6 @@ void Fps::Update()
 	++m_Count;
 }
 
-// FPS ’l‚ð‰æ–Ê‚É•\Ž¦
-void Fps::Draw(int x, int y, TTF_Font* font, SDL_Color color, SDL_Renderer* renderer) const
-{
-	std::string t_Str("FPS : ");
-
-	std::ostringstream t_ss;
-	t_ss << m_Fps;
-	t_Str += t_ss.str();
-
-	SDL_Surface* t_Surface = TTF_RenderUTF8_Blended(font, t_Str.c_str(), color);
-
-	SDL_Rect t_Print_Rect = { x, y, t_Surface->w, t_Surface->h };
-	
-	SDL_Texture* t_Texture = SDL_CreateTextureFromSurface(renderer, t_Surface);
-
-	SDL_RenderCopy(renderer, t_Texture, nullptr, &t_Print_Rect);
-}
-
 void Fps::Wait() const
 {
 	// ‚©‚©‚Á‚½ŽžŠÔ
@@ -58,4 +40,15 @@ void Fps::Wait() const
 	if (0 < t_Wait_Time) {
 		SDL_Delay(t_Wait_Time);
 	}
+}
+
+std::string Fps::Get_Fps()
+{
+	std::string t_Str("FPS : ");
+
+	std::ostringstream t_ss;
+	t_ss << m_Fps;
+	t_Str += t_ss.str();
+
+	return t_Str;
 }

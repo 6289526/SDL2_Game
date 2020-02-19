@@ -1,8 +1,8 @@
 #pragma once
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
 
 const int Window_x = 1024;	// ウィンドウの幅
 const int Window_y =  768;	// ウィンドウの高さ

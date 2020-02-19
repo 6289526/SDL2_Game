@@ -1,6 +1,9 @@
 #pragma once
 #include "Character.h"
 
+#include <string>
+#include <sstream>
+
 #include "Animation.h"
 #include "Map.h"
 
@@ -41,7 +44,8 @@ private:
 	Jump_Wave m_Jump_Wave;	// ジャンプの処理に使う
 	bool m_Key_Lock;	// true 時キーボード操作不可
 	SDL_Rect m_Gun_Arm_Position;	// 射撃絵の腕の表示座標
-	double m_Angle;	 // 銃の角度
+	double m_Angle;	 // 腕の角度
 	bool m_Gun_Flag;	// 銃を撃っているときは true
+	SDL_Point m_Mouse_Position;	// マウス座標
 };
 
