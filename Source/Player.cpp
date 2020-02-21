@@ -1,6 +1,6 @@
 #include "Player.h"
 
-#include "math.h"
+#include "cmath"
 
 Player::Player(SDL_Renderer* renderer)
 	:	Character(300, 300, 800 * Player_Scale, 1000 * Player_Scale, Right),
@@ -23,6 +23,11 @@ Player::Player(SDL_Renderer* renderer)
 
 	m_Mouse_Position.x = Window_x;
 	m_Mouse_Position.y = Window_y;
+
+	// 弾の初期化 10発分
+	for (int i = 0; i < Bullet_Num; ++i) {
+		m_Bullet[i] = nullptr;
+	}
 }
 
 void Player::Draw(SDL_Renderer* renderer, Map& map)
@@ -47,6 +52,8 @@ void Player::Draw(SDL_Renderer* renderer, Map& map)
 	case Jump:
 		Draw_Jump(renderer, map); break;
 	}
+
+	Draw_Bullet(renderer, map);
 }
 
 
@@ -139,8 +146,10 @@ void Player::Draw_Stand(SDL_Renderer* renderer)
 		double t_Difference_x = static_cast<double>(m_Mouse_Position.x) - static_cast<double>(m_Gun_Arm_Position.x);
 		double t_Difference_y = static_cast<double>(m_Mouse_Position.y) - static_cast<double>(m_Gun_Arm_Position.y);
 
-		// 度数表記に変換して代入
-		m_Angle = atan2(t_Difference_y, t_Difference_x) * 180 / M_PI;
+		m_Angle = atan2(t_Difference_y, t_Difference_x);
+
+		// 度数表記
+		double t_Angle = m_Angle * 180 / M_PI;
 
 		// 腕の表示
 		if (m_Direction == Right) {
@@ -149,7 +158,7 @@ void Player::Draw_Stand(SDL_Renderer* renderer)
 			// 回転中心
 			SDL_Point t_Point = { 0,0 };
 			// 真横の右を０度にする角度調整と描画
-			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, m_Angle - 28, &t_Point);
+			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, t_Angle - 28, &t_Point);
 		}
 		else if (m_Direction == Left) {
 			// 腕の中心座標
@@ -158,7 +167,7 @@ void Player::Draw_Stand(SDL_Renderer* renderer)
 			// 回転中心
 			SDL_Point t_Point = { m_Gun_Arm_Position.w, 0 };
 			// 真横の右を０度にする角度調整と描画
-			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, m_Angle + 28 + 180, &t_Point, true);
+			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, t_Angle + 28 + 180, &t_Point, true);
 		}
 	}
 	// そうでない場合
@@ -196,11 +205,10 @@ void Player::Draw_Walk(SDL_Renderer* renderer)
 		double t_Difference_x = static_cast<double>(m_Mouse_Position.x) - static_cast<double>(m_Gun_Arm_Position.x);
 		double t_Difference_y = static_cast<double>(m_Mouse_Position.y) - static_cast<double>(m_Gun_Arm_Position.y);
 
-		// 度数表記に変換して代入
-		m_Angle = atan2(t_Difference_y, t_Difference_x) * 180 / M_PI;
+		m_Angle = atan2(t_Difference_y, t_Difference_x);
 
 		// 度数表記に変換して代入
-		m_Angle = atan2(t_Difference_y, t_Difference_x) * 180 / M_PI;
+		double t_Angle = m_Angle * 180 / M_PI;
 
 		// 腕の表示
 		if (m_Direction == Right) {
@@ -208,14 +216,14 @@ void Player::Draw_Walk(SDL_Renderer* renderer)
 			m_Gun_Arm_Position.x = m_Position.x + m_Position.w / 2;
 			// 回転中心
 			SDL_Point t_Point = { 0,0 };
-			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, m_Angle - 30.0, &t_Point);
+			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, t_Angle - 30.0, &t_Point);
 		}
 		else if (m_Direction == Left) {
 			// 腕の中心座標
 			m_Gun_Arm_Position.x = m_Position.x - m_Position.w / 3;
 			// 回転中心
 			SDL_Point t_Point = { m_Gun_Arm_Position.w, 0 };
-			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, m_Angle + 30.0 + 180, &t_Point, true);
+			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, t_Angle + 180, &t_Point, true);
 		}
 	}
 	// そうでない場合
@@ -299,4 +307,45 @@ void Player::Draw_Jump(SDL_Renderer* renderer, Map& map)
 	// 表示が終了したため戻す
 	m_Position.y -= 8;
 }
+
+void Player::Draw_Bullet(SDL_Renderer* renderer, Map& map)
+{
+	bool t_Rock = false;	// 一定時間おきにしか弾が出ないようにロック
+
+	static int t_Count = 60;
+
+	// １秒おきにしか弾が出ない
+	if (m_Gun_Flag && t_Count++ == 60) {
+		t_Count = 0;
+		t_Rock = true;
+	}
+
+	if (m_Gun_Flag && !t_Rock) {
+		m_Angle = 2 * M_PI - m_Angle;
+		// 弾を１０発撃ち切っていないなら
+		for (int i = 0; i < Bullet_Num; ++i) {
+			if (m_Bullet[i] == nullptr) {
+				if (m_Direction == Right) {
+					m_Bullet[i] = new Bullet(m_Gun_Arm_Position, 1, 10.0, m_Angle, m_Direction, renderer);
+				}
+				else if (m_Direction == Left) {
+					m_Bullet[i] = new Bullet(m_Gun_Arm_Position, 1, 10.0, m_Angle, m_Direction, renderer);
+				}
+			}
+		}
+	}
+
+	// 生成された弾を動かす あるいは 終わらせる処理
+	for (int i = 0; i < Bullet_Num; ++i) {
+		if (m_Bullet[i] != nullptr) {
+			m_Bullet[i]->Draw(renderer, map);
+
+			if (m_Bullet[i]->End) {
+				delete m_Bullet[i];
+				m_Bullet[i] = nullptr;
+			}
+		}
+	}
+}
+
 

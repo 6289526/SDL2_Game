@@ -6,12 +6,15 @@
 
 #include "Animation.h"
 #include "Map.h"
+#include "Bullet.h"
 
 enum Jump_Wave {
 	Take_Off,	// 離陸
 	Jumping,	// 空中
 	Landing		// 着地
 };
+
+const int Bullet_Num = 10;
 
 class Player :
 	public Character
@@ -31,6 +34,8 @@ private:
 	void Draw_Walk(SDL_Renderer* renderer);
 	/* (レンダラ，マップ) */
 	void Draw_Jump(SDL_Renderer* renderer, Map& map);
+	/* (レンダラ，マップ) */
+	void Draw_Bullet(SDL_Renderer* renderer, Map& map);
 
 private:
 	Animation m_Animation_Stand;	// 立ち絵
@@ -44,8 +49,10 @@ private:
 	Jump_Wave m_Jump_Wave;	// ジャンプの処理に使う
 	bool m_Key_Lock;	// true 時キーボード操作不可
 	SDL_Rect m_Gun_Arm_Position;	// 射撃絵の腕の表示座標
-	double m_Angle;	 // 腕の角度
+	double m_Angle;	 // 腕の角度 ラジアン
 	bool m_Gun_Flag;	// 銃を撃っているときは true
 	SDL_Point m_Mouse_Position;	// マウス座標
+
+	Bullet* m_Bullet[Bullet_Num];	// １０発の弾を撃つことができる
 };
 
