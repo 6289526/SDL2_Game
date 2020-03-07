@@ -1,10 +1,10 @@
 #pragma once
 
-#include "string"
-
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
+
+#include "Fanction.h"
 
 const int Window_x = 1024;	// ウィンドウの幅
 const int Window_y =  768;	// ウィンドウの高さ
@@ -37,6 +37,4 @@ private:
 	SDL_Event m_Event;	// イベント関係
 };
 
-/* (表示する文字，レンダラ, 表示するｙ座標) */
-void Print_Screen(const std::string& str, SDL_Renderer* renderer, int y);
 

@@ -42,13 +42,9 @@ void Fps::Wait() const
 	}
 }
 
-std::string Fps::Get_Fps()
+void Fps::Print_Fps(SDL_Renderer* renderer, int x, int y)
 {
-	std::string t_Str("FPS : ");
-
-	std::ostringstream t_ss;
-	t_ss << m_Fps;
-	t_Str += t_ss.str();
-
-	return t_Str;
+	std::string t_Str = "FPS : ";
+	Print_Screen(t_Str, renderer, x, y);
+	Print_Screen(To_String(m_Fps), renderer, x + 70, y);
 }

@@ -1,6 +1,6 @@
 #include "Player.h"
 
-#include "cmath"
+#include "Fanction.h"
 
 Player::Player(SDL_Renderer* renderer)
 	:	Character(300, 300, 800 * Player_Scale, 1000 * Player_Scale, Right),
@@ -13,7 +13,7 @@ Player::Player(SDL_Renderer* renderer)
 		m_Jump_Height(25),
 		m_Jump_Wave(Take_Off),
 		m_Key_Lock(false),
-		m_Angle(0.0),
+		m_Angle_deg(0.0),
 		m_Gun_Flag(false)
 {
 	m_Gun_Arm_Position.x = m_Position.x;
@@ -31,15 +31,21 @@ Player::Player(SDL_Renderer* renderer)
 }
 
 void Player::Draw(SDL_Renderer* renderer, Map& map)
-{
-	// 下の当たり判定
-	Collision_Under(map);
-	
-	//重力
-	Gravity();
-
+{	
 	// マウスのウィンドウ上の座標を得る
 	SDL_GetMouseState(&m_Mouse_Position.x, &m_Mouse_Position.y);
+
+	// 腕の角度取得 真右方向を０に調整
+	m_Angle_deg = Angle_Degrees(m_Gun_Arm_Position, m_Mouse_Position);
+
+	// 腕の可動域を設定
+	m_Angle_deg = Arm_Angle_Limit(m_Angle_deg);
+
+	// 下の当たり判定
+	Collision_Under(map);
+
+	//重力
+	Gravity();
 
 	// 状態によって描画絵が異なる
 	switch (m_Situation) {
@@ -124,11 +130,21 @@ void Player::Key_Check(SDL_Event event, bool& end, Map& map)
 	}
 }
 
+void Player::Print_Angle(SDL_Renderer* renderer, int x, int y)
+{
+	std::string t_Str = "Angle : ";
+	Print_Screen(t_Str, renderer, x, y);
+	Print_Screen(To_String(m_Angle_deg), renderer, x + 100, y);
+}
+
 void Player::Draw_Stand(SDL_Renderer* renderer)
 {
 
 	// 表示位置調整 画面表示時のみ
 	m_Position.y += 8;
+
+	// 腕の左上ｙ調整
+	m_Gun_Arm_Position.y = m_Position.y + m_Position.h / 2 - 10;
 
 	// 銃を撃っている場合
 	if (m_Gun_Flag) {
@@ -140,35 +156,8 @@ void Player::Draw_Stand(SDL_Renderer* renderer)
 			m_Animation_Gun_Stand.Draw(m_Position, renderer, 10, true);
 		}
 
-		// 腕の左上ｙ
-		m_Gun_Arm_Position.y = m_Position.y + m_Position.h / 2 - 10;
-
-		double t_Difference_x = static_cast<double>(m_Mouse_Position.x) - static_cast<double>(m_Gun_Arm_Position.x);
-		double t_Difference_y = static_cast<double>(m_Mouse_Position.y) - static_cast<double>(m_Gun_Arm_Position.y);
-
-		m_Angle = atan2(t_Difference_y, t_Difference_x);
-
-		// 度数表記
-		double t_Angle = m_Angle * 180 / M_PI;
-
-		// 腕の表示
-		if (m_Direction == Right) {
-			// 腕の右上座標
-			m_Gun_Arm_Position.x = m_Position.x + m_Position.w / 2;
-			// 回転中心
-			SDL_Point t_Point = { 0,0 };
-			// 真横の右を０度にする角度調整と描画
-			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, t_Angle - 28, &t_Point);
-		}
-		else if (m_Direction == Left) {
-			// 腕の中心座標
-			m_Gun_Arm_Position.x = m_Position.x - m_Position.w / 3;
-
-			// 回転中心
-			SDL_Point t_Point = { m_Gun_Arm_Position.w, 0 };
-			// 真横の右を０度にする角度調整と描画
-			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, t_Angle + 28 + 180, &t_Point, true);
-		}
+		// 腕描画
+		Draw_Arm(renderer);
 	}
 	// そうでない場合
 	else {
@@ -189,6 +178,9 @@ void Player::Draw_Walk(SDL_Renderer* renderer)
 	// 表示位置調整 画面表示時のみ
 	m_Position.y += 8;
 
+	// 腕の左上ｙ調整
+	m_Gun_Arm_Position.y = m_Position.y + m_Position.h / 2 - 10;
+
 	// 銃を撃っている場合
 	if (m_Gun_Flag) {
 		// プレイヤ描画
@@ -199,32 +191,8 @@ void Player::Draw_Walk(SDL_Renderer* renderer)
 			m_Animation_Gun_Walk.Draw(m_Position, renderer, 5, true);
 		}
 
-		// 腕の左上ｙ
-		m_Gun_Arm_Position.y = m_Position.y + m_Position.h / 2 - 10;
-
-		double t_Difference_x = static_cast<double>(m_Mouse_Position.x) - static_cast<double>(m_Gun_Arm_Position.x);
-		double t_Difference_y = static_cast<double>(m_Mouse_Position.y) - static_cast<double>(m_Gun_Arm_Position.y);
-
-		m_Angle = atan2(t_Difference_y, t_Difference_x);
-
-		// 度数表記に変換して代入
-		double t_Angle = m_Angle * 180 / M_PI;
-
-		// 腕の表示
-		if (m_Direction == Right) {
-			// 腕の右上座標
-			m_Gun_Arm_Position.x = m_Position.x + m_Position.w / 2;
-			// 回転中心
-			SDL_Point t_Point = { 0,0 };
-			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, t_Angle - 30.0, &t_Point);
-		}
-		else if (m_Direction == Left) {
-			// 腕の中心座標
-			m_Gun_Arm_Position.x = m_Position.x - m_Position.w / 3;
-			// 回転中心
-			SDL_Point t_Point = { m_Gun_Arm_Position.w, 0 };
-			m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, t_Angle + 180, &t_Point, true);
-		}
+		// 腕描画
+		Draw_Arm(renderer);
 	}
 	// そうでない場合
 	else {
@@ -321,15 +289,18 @@ void Player::Draw_Bullet(SDL_Renderer* renderer, Map& map)
 	}
 
 	if (m_Gun_Flag && !t_Rock) {
-		m_Angle = 2 * M_PI - m_Angle;
+		// ラジアン表記に変更
+		double t_Angle_rad = m_Angle_deg * M_PI / 180;
+		// 回転方向を逆にする
+		t_Angle_rad = 2 * M_PI - t_Angle_rad;
 		// 弾を１０発撃ち切っていないなら
 		for (int i = 0; i < Bullet_Num; ++i) {
 			if (m_Bullet[i] == nullptr) {
 				if (m_Direction == Right) {
-					m_Bullet[i] = new Bullet(m_Gun_Arm_Position, 1, 10.0, m_Angle, m_Direction, renderer);
+					m_Bullet[i] = new Bullet(m_Gun_Arm_Position, 1, 10.0, t_Angle_rad, m_Direction, renderer);
 				}
 				else if (m_Direction == Left) {
-					m_Bullet[i] = new Bullet(m_Gun_Arm_Position, 1, 10.0, m_Angle, m_Direction, renderer);
+					m_Bullet[i] = new Bullet(m_Gun_Arm_Position, 1, 10.0, t_Angle_rad, m_Direction, renderer);
 				}
 			}
 		}
@@ -346,6 +317,53 @@ void Player::Draw_Bullet(SDL_Renderer* renderer, Map& map)
 			}
 		}
 	}
+}
+
+void Player::Draw_Arm(SDL_Renderer* renderer)
+{
+	// 腕の表示
+	if (m_Direction == Right) {
+		// 腕の右上座標
+		m_Gun_Arm_Position.x = m_Position.x + m_Position.w / 2;
+		// 回転中心
+		SDL_Point t_Point = { 0,0 };
+		// 真横の右を０度にする角度調整と描画
+		m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, m_Angle_deg - 28, &t_Point);
+	}
+	else if (m_Direction == Left) {
+		// 腕の中心座標
+		m_Gun_Arm_Position.x = m_Position.x - m_Position.w / 3;
+
+		// 回転中心
+		SDL_Point t_Point = { m_Gun_Arm_Position.w, 0 };
+		// 真横の右を０度にする角度調整と描画
+		m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, m_Angle_deg + 28 + 180, &t_Point, true);
+	}
+}
+
+double Player::Arm_Angle_Limit(double angle)
+{
+	
+	// 可動域
+	if (m_Direction == Right) {
+		if (90.0 < m_Angle_deg && m_Angle_deg < 180.0) {
+			m_Angle_deg = 90.0;
+		}
+		else if (-180.0 < m_Angle_deg && m_Angle_deg < -90.0) {
+			m_Angle_deg = -90.0;
+		}
+	}
+
+	if (m_Direction == Left) {
+		if (0.0 < m_Angle_deg && m_Angle_deg < 90.0) {
+			m_Angle_deg = 90.0;
+		}
+		else if (-90.0 < m_Angle_deg && m_Angle_deg < 0.0) {
+			m_Angle_deg = -90.0;
+		}
+	}
+
+	return m_Angle_deg;
 }
 
 

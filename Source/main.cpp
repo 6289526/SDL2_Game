@@ -28,9 +28,12 @@ int main(int argc, char* argv[]) {
         map.Draw(core.Get_Renderer());  //  マップ描画
 
         // FPS値表示
-        Print_Screen(fps.Get_Fps(), core.Get_Renderer(), 30);
+        fps.Print_Fps(core.Get_Renderer(), 30, 30);
 
         player.Draw(core.Get_Renderer(), map);   // プレイヤー描画
+
+        // プレイヤの腕の角度表示
+        player.Print_Angle(core.Get_Renderer(), 30, 60);
 
         SDL_RenderPresent(core.Get_Renderer()); // 画面に表示
 

@@ -26,6 +26,8 @@ public:
 	void Draw(SDL_Renderer* renderer, Map& map);
 	/* (イベント，エンドフラグ，マップ) */
 	void Key_Check(SDL_Event event, bool& end, Map& map);
+	/* (レンダラ，表示座標ｘ，表示座標ｙ) */
+	void Print_Angle(SDL_Renderer* renderer, int x, int y);
 
 private:
 	/* (レンダラ) */
@@ -36,6 +38,9 @@ private:
 	void Draw_Jump(SDL_Renderer* renderer, Map& map);
 	/* (レンダラ，マップ) */
 	void Draw_Bullet(SDL_Renderer* renderer, Map& map);
+	/*(レンダラ)*/
+	void Draw_Arm(SDL_Renderer* renderer);
+	double Arm_Angle_Limit(double angle);
 
 private:
 	Animation m_Animation_Stand;	// 立ち絵
@@ -49,7 +54,7 @@ private:
 	Jump_Wave m_Jump_Wave;	// ジャンプの処理に使う
 	bool m_Key_Lock;	// true 時キーボード操作不可
 	SDL_Rect m_Gun_Arm_Position;	// 射撃絵の腕の表示座標
-	double m_Angle;	 // 腕の角度 ラジアン
+	double m_Angle_deg;	 // 腕の角度 度数表記
 	bool m_Gun_Flag;	// 銃を撃っているときは true
 	SDL_Point m_Mouse_Position;	// マウス座標
 
