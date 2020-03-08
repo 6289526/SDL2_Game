@@ -280,28 +280,41 @@ void Player::Draw_Bullet(SDL_Renderer* renderer, Map& map)
 {
 	bool t_Rock = false;	// 一定時間おきにしか弾が出ないようにロック
 
-	static int t_Count = 60;
+	static int t_Count = 30;
 
-	// １秒おきにしか弾が出ない
-	if (m_Gun_Flag && t_Count++ == 60) {
-		t_Count = 0;
+	// ０．1秒おきにしか弾が出ない
+	if (t_Count++ < 30) {
 		t_Rock = true;
 	}
 
 	if (m_Gun_Flag && !t_Rock) {
-		// ラジアン表記に変更
+		// ラジアン表記
 		double t_Angle_rad = m_Angle_deg * M_PI / 180;
 		// 回転方向を逆にする
 		t_Angle_rad = 2 * M_PI - t_Angle_rad;
 		// 弾を１０発撃ち切っていないなら
 		for (int i = 0; i < Bullet_Num; ++i) {
 			if (m_Bullet[i] == nullptr) {
+				SDL_Rect t_Bullet_Position = m_Gun_Arm_Position;
+
 				if (m_Direction == Right) {
-					m_Bullet[i] = new Bullet(m_Gun_Arm_Position, 1, 10.0, t_Angle_rad, m_Direction, renderer);
+					t_Bullet_Position.x += t_Bullet_Position.w * cos(t_Angle_rad + 0.13);
+					t_Bullet_Position.y -= t_Bullet_Position.w * sin(t_Angle_rad + 0.13);
+
+					m_Bullet[i] = new Bullet(t_Bullet_Position, 1, 10.0, t_Angle_rad, m_Direction, renderer);
 				}
 				else if (m_Direction == Left) {
-					m_Bullet[i] = new Bullet(m_Gun_Arm_Position, 1, 10.0, t_Angle_rad, m_Direction, renderer);
+					// 肩の位置の座標
+					t_Bullet_Position.x += t_Bullet_Position.w;
+
+					t_Bullet_Position.x += t_Bullet_Position.w * 1.3 * cos(t_Angle_rad - 0.13);
+					t_Bullet_Position.y -= t_Bullet_Position.w * 1.3 * sin(t_Angle_rad - 0.13);
+
+					
+					m_Bullet[i] = new Bullet(t_Bullet_Position, 1, 10.0, t_Angle_rad + 0.05, m_Direction, renderer);
 				}
+				t_Count = 0;
+				break;
 			}
 		}
 	}
@@ -323,7 +336,7 @@ void Player::Draw_Arm(SDL_Renderer* renderer)
 {
 	// 腕の表示
 	if (m_Direction == Right) {
-		// 腕の右上座標
+		// 腕の左上座標
 		m_Gun_Arm_Position.x = m_Position.x + m_Position.w / 2;
 		// 回転中心
 		SDL_Point t_Point = { 0,0 };
@@ -331,7 +344,7 @@ void Player::Draw_Arm(SDL_Renderer* renderer)
 		m_Image_Gun_Arm.Draw_Rotation(m_Gun_Arm_Position, renderer, m_Angle_deg - 28, &t_Point);
 	}
 	else if (m_Direction == Left) {
-		// 腕の中心座標
+		// 腕の左上座標
 		m_Gun_Arm_Position.x = m_Position.x - m_Position.w / 3;
 
 		// 回転中心
