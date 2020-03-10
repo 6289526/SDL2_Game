@@ -3,7 +3,8 @@
 // コンストラクタ
 Map::Map(SDL_Renderer* renderer, int x)
 	:	m_BackGround1("Image/Map/Background.bmp", renderer),
-		m_Floor_Length(x + 2)
+		m_Floor_Length(x + 2),
+		m_Move_Value(0)
 {
 	m_Floor_Information.w = Window_x / (m_Floor_Length - 2);
 	m_Floor_Information.h = 0;
@@ -60,6 +61,12 @@ void Map::Text_to_Map(const char* file_name, int pos, int s, int e)
 		std::getline(t_Ifs, t_Str);
 		m_Map[j] = std::stoi(t_Str);
 	}
+}
+
+void Map::Set_Plus_x(int value)
+{
+	m_Move_Value = value;
+	m_Floor_Information.x += value;
 }
 
 // マップの端に達したら true それ以外は false

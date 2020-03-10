@@ -19,9 +19,10 @@ public:
 	/* (txtファイルのパス，変換開始位置^マップ配列の添え字^，読み出し開始行，読み出し終了行) */
 	void Text_to_Map(const char* file_name, int pos, int s, int e);
 	/* (マップを動かす値) */
-	void Set_Plus_x(int value) { m_Floor_Information.x += value; }
+	void Set_Plus_x(int value);
 	/* (キャラの向き) */
 	bool Map_Lim(Direction direction) const;
+	int Get_Move_Value() const { return m_Move_Value; }
 
 private:
 	/* (レンダラ) */
@@ -37,5 +38,7 @@ private:
 	int* m_Map;	// 床の高さを持つ１次元配列
 	int m_Text_Line;	// 現在の txt ファイルの行
 	SDL_Rect m_Floor_Information;	//一番左の床の左上ｘ，幅ｗ，(ｙ，ｈは使わない)
+
+	int m_Move_Value;	// マップをどれだけ動かすか
 };
 

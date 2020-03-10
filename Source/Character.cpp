@@ -59,8 +59,8 @@ void Character::Collision_Under(Map& map)
 		m_Gravity = m_Min_Gravity;
 	}
 
-	// ウィンドウより下に行くと「死」
-	if (Window_y <= m_Position.y) {
+	// ウィンドウ外に行くと「死」
+	if (m_Position.x <= 0 || Window_x < m_Position.x + m_Position.w || m_Position.y < 0 || Window_y < m_Position.y) {
 		m_HP = 0;
 	}
 }

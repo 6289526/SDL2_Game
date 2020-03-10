@@ -5,6 +5,7 @@
 #include "Fps.h"
 #include "Map.h"
 #include "Player.h"
+#include "Manage_Enemy.h"
 
 int main(int argc, char* argv[]) {
 
@@ -15,6 +16,11 @@ int main(int argc, char* argv[]) {
     Map map(core.Get_Renderer(), 128);  // マップ
 
     Player player(core.Get_Renderer());  // プレイヤー
+
+    SDL_Rect Enemy1_Position = { 400, 400, 800 * Enemy_Scale, 1000 * Enemy_Scale };
+
+    Manage_Enemy enemy; // 敵情報
+    enemy.Create_Enemy(core.Get_Renderer(), Enemy1_Position);
 
     // エンドフラグが立つまで実行
     while (!core.m_Program_End) {
@@ -31,6 +37,8 @@ int main(int argc, char* argv[]) {
         fps.Print_Fps(core.Get_Renderer(), 30, 30);
 
         player.Draw(core.Get_Renderer(), map);   // プレイヤー描画
+
+        enemy.Draw(core.Get_Renderer(), map);
 
         // プレイヤの腕の角度表示
         player.Print_Angle(core.Get_Renderer(), 30, 60);

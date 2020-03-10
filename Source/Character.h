@@ -17,6 +17,7 @@ public:
 	Character(int x, int y, int w, int h, Direction direction);
 	/* (レンダラ，マップ) */
 	virtual void Draw(SDL_Renderer* renderer, Map& map) = 0;
+	int Get_Hp() const { return m_HP; }
 
 protected:
 	/* (マップ，左右幅の調整^この値だけ判定が内側に寄る^) */

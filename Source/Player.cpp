@@ -88,14 +88,24 @@ void Player::Key_Check(SDL_Event event, bool& end, Map& map)
 	}
 
 	// 立ち絵
-	// 右キー左キー同時押し　ジャンプ中でない
-	if (t_Key[SDL_SCANCODE_D] && t_Key[SDL_SCANCODE_A] && m_Situation != Jump) {
-		m_Situation = Stand;
+	// 右キー左キー同時押し
+	if (t_Key[SDL_SCANCODE_D] && t_Key[SDL_SCANCODE_A]) {
+		// ジャンプ中でない
+		if (m_Situation != Jump) {
+			m_Situation = Stand;
+		}
+
+		map.Set_Plus_x(0);
 	}
 	// 立ち絵
-	// 右キー左キーどちらも押していない　ジャンプ中でない
-	else if (!t_Key[SDL_SCANCODE_D] && !t_Key[SDL_SCANCODE_A] && m_Situation != Jump) {
-		m_Situation = Stand;
+	// 右キー左キーどちらも押していない
+	else if (!t_Key[SDL_SCANCODE_D] && !t_Key[SDL_SCANCODE_A]) {
+		// ジャンプ中でない
+		if (m_Situation != Jump) {
+			m_Situation = Stand;
+		}
+
+		map.Set_Plus_x(0);
 	}
 	// 歩行絵
 	// 右キーでマップを左に移動　ジャンプ中は特殊処理
@@ -107,6 +117,9 @@ void Player::Key_Check(SDL_Event event, bool& end, Map& map)
 		if (!map.Map_Lim(Right) && Collision_Side(map, 8) && !m_Key_Lock) {
 			map.Set_Plus_x(-4);
 		}
+		else {
+			map.Set_Plus_x(0);
+		}
 	}
 	// 歩行絵
 	// 左キーでマップを右に移動　ジャンプ中は特殊処理
@@ -117,6 +130,9 @@ void Player::Key_Check(SDL_Event event, bool& end, Map& map)
 		m_Direction = Left;
 		if (!map.Map_Lim(Left) && Collision_Side(map, 8) && !m_Key_Lock) {
 			map.Set_Plus_x(4);
+		}
+		else {
+			map.Set_Plus_x(0);
 		}
 	}
 
