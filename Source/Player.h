@@ -28,6 +28,8 @@ public:
 	void Key_Check(SDL_Event event, bool& end, Map& map);
 	/* (レンダラ，表示座標ｘ，表示座標ｙ) */
 	void Print_Angle(SDL_Renderer* renderer, int x, int y);
+	/* (レンダラ，表示座標ｘ，表示座標ｙ) */
+	void Print_Position(SDL_Renderer* renderer, int x, int y);
 
 private:
 	/* (レンダラ) */
@@ -40,6 +42,7 @@ private:
 	void Draw_Bullet(SDL_Renderer* renderer, Map& map);
 	/*(レンダラ)*/
 	void Draw_Arm(SDL_Renderer* renderer);
+	/* (制限をつける角度) */
 	double Arm_Angle_Limit(double angle);
 
 private:

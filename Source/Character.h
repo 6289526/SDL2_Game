@@ -18,6 +18,9 @@ public:
 	/* (レンダラ，マップ) */
 	virtual void Draw(SDL_Renderer* renderer, Map& map) = 0;
 	int Get_Hp() const { return m_HP; }
+	SDL_Rect Get_Position() const { return m_Position; }
+	/* (レンダラ，表示ｘ座標，表示ｙ座標) */
+	virtual void Print_Position(SDL_Renderer* renderer, int x, int y);
 
 protected:
 	/* (マップ，左右幅の調整^この値だけ判定が内側に寄る^) */

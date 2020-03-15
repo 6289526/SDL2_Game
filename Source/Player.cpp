@@ -30,6 +30,7 @@ Player::Player(SDL_Renderer* renderer)
 	}
 }
 
+// 描画
 void Player::Draw(SDL_Renderer* renderer, Map& map)
 {	
 	// マウスのウィンドウ上の座標を得る
@@ -62,7 +63,7 @@ void Player::Draw(SDL_Renderer* renderer, Map& map)
 	Draw_Bullet(renderer, map);
 }
 
-
+// キー操作を受け付ける
 void Player::Key_Check(SDL_Event event, bool& end, Map& map)
 {
 	// ウィンドウのバツで終了
@@ -146,13 +147,23 @@ void Player::Key_Check(SDL_Event event, bool& end, Map& map)
 	}
 }
 
+// 腕の角度を表示
 void Player::Print_Angle(SDL_Renderer* renderer, int x, int y)
 {
-	std::string t_Str = "Angle : ";
+	std::string t_Str = "Player Angle : ";
 	Print_Screen(t_Str, renderer, x, y);
-	Print_Screen(To_String(m_Angle_deg), renderer, x + 100, y);
+	Print_Screen(To_String(m_Angle_deg), renderer, x + 200, y);
 }
 
+// プレイヤの座標を表示
+void Player::Print_Position(SDL_Renderer* renderer, int x, int y)
+{
+	std::string t_Str = "Player Position : ";
+	Print_Screen(t_Str, renderer, x, y);
+	Character::Print_Position(renderer, x + 220, y);
+}
+
+// 立ち絵描画
 void Player::Draw_Stand(SDL_Renderer* renderer)
 {
 
@@ -188,7 +199,7 @@ void Player::Draw_Stand(SDL_Renderer* renderer)
 	m_Position.y -= 8;
 }
 
-
+// 歩き絵描画
 void Player::Draw_Walk(SDL_Renderer* renderer)
 {
 	// 表示位置調整 画面表示時のみ
@@ -224,6 +235,7 @@ void Player::Draw_Walk(SDL_Renderer* renderer)
 	m_Position.y -= 8;
 }
 
+// ジャンプ絵描画
 void Player::Draw_Jump(SDL_Renderer* renderer, Map& map)
 {
 	// 表示位置調整 画面表示時のみ
@@ -292,6 +304,7 @@ void Player::Draw_Jump(SDL_Renderer* renderer, Map& map)
 	m_Position.y -= 8;
 }
 
+// 弾を描画
 void Player::Draw_Bullet(SDL_Renderer* renderer, Map& map)
 {
 	bool t_Rock = false;	// 一定時間おきにしか弾が出ないようにロック
@@ -348,6 +361,7 @@ void Player::Draw_Bullet(SDL_Renderer* renderer, Map& map)
 	}
 }
 
+// 腕描画
 void Player::Draw_Arm(SDL_Renderer* renderer)
 {
 	// 腕の表示
@@ -370,6 +384,7 @@ void Player::Draw_Arm(SDL_Renderer* renderer)
 	}
 }
 
+// 腕の可動域
 double Player::Arm_Angle_Limit(double angle)
 {
 	

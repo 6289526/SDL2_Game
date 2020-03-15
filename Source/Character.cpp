@@ -16,6 +16,19 @@ Character::Character(int x, int y, int w, int h, Direction direction)
 	m_Situation = Stand;
 }
 
+// 座標を表示
+void Character::Print_Position(SDL_Renderer* renderer, int x, int y)
+{
+	std::string t_Str = "(";
+	Print_Screen(t_Str, renderer, x, y);
+	Print_Screen(To_String(m_Position.x), renderer, x + 20, y);
+	t_Str = ",";
+	Print_Screen(t_Str, renderer, x + 60, y);
+	Print_Screen(To_String(m_Position.y), renderer, x + 80, y);
+	t_Str = ")";
+	Print_Screen(t_Str, renderer, x + 120, y);
+}
+
 // 横の当たり判定 adjust の値だけ判定はキャラの内側に寄る
 bool Character::Collision_Side(Map& map, int adjust) const
 {
@@ -39,6 +52,7 @@ bool Character::Collision_Side(Map& map, int adjust) const
 	return true;
 }
 
+// 下の当たり判定
 void Character::Collision_Under(Map& map)
 {
 	// 当たり判定は２点で行う
@@ -65,6 +79,7 @@ void Character::Collision_Under(Map& map)
 	}
 }
 
+// 重力を与える
 void Character::Gravity()
 {
 	// 空中にいるなら滞空時間に応じた重力を付加
