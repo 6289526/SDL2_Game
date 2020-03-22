@@ -12,7 +12,7 @@ Character::Character(int x, int y, int w, int h, Direction direction)
 	m_Position.y = y;
 	m_Position.w = w;
 	m_Position.h = h;
-	
+
 	m_Situation = Stand;
 }
 
@@ -43,8 +43,6 @@ bool Character::Collision_Side(Map& map, int adjust) const
 	}
 	else if (m_Direction == Left) {
 		if (t_Height + 10 < map.Get_Height(m_Position.x + adjust)) {
-			int a = map.Get_Height(m_Position.x + m_Position.w - adjust);
-			int b = map.Get_Height(m_Position.x + adjust);
 			return false;
 		}
 	}

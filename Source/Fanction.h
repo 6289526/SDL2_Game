@@ -1,7 +1,8 @@
 #pragma once
 
 #include "SDL2/SDL.h"
-#include "string"
+#include <string>
+#include <cmath>
 
 // Šp“xŒvZ(“x”)
 template <typename T, typename U>

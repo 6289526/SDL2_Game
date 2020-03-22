@@ -26,4 +26,3 @@ private:
 private:
 	Enemy* m_Enemy[Enemy_Num];	// “Gî•ñ
 };
-

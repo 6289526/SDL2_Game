@@ -1,10 +1,7 @@
 #include "Fanction.h"
 
-#include "cmath"
-#include "string"
 #include "Core.h"
 
-#include <string>
 #include <sstream>
 
 // Šp“x‚É”ÍˆÍ‚ð‚Â‚¯‚é
@@ -67,4 +64,3 @@ std::string To_String(float num)
 
 	return t_Str;
 }
-

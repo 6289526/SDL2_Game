@@ -106,7 +106,5 @@ void Animation::Swicth()
 	// ‚»‚êˆÈŠO‚Í‰E‚É‚¸‚ç‚·
 	else {
 		m_Image_Pos.x += m_Image_Pos.w;
-		int i = 0;
 	}
 }
-

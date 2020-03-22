@@ -1,0 +1,37 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(445,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+Animation.obj : error LNK2019: 未解決の外部シンボル _SDL_RenderCopy が関数 "public: virtual void __thiscall Animation::Draw(struct SDL_Rect,struct SDL_Renderer *,bool)" (?Draw@Animation@@UAEXUSDL_Rect@@PAUSDL_Renderer@@_N@Z) で参照されました。
+Fps.obj : error LNK2001: 外部シンボル "_SDL_RenderCopy" は未解決です。
+Image.obj : error LNK2001: 外部シンボル "_SDL_RenderCopy" は未解決です。
+Map.obj : error LNK2001: 外部シンボル "_SDL_RenderCopy" は未解決です。
+Animation.obj : error LNK2019: 未解決の外部シンボル _SDL_RenderCopyEx が関数 "public: virtual void __thiscall Animation::Draw(struct SDL_Rect,struct SDL_Renderer *,bool)" (?Draw@Animation@@UAEXUSDL_Rect@@PAUSDL_Renderer@@_N@Z) で参照されました。
+Image.obj : error LNK2001: 外部シンボル "_SDL_RenderCopyEx" は未解決です。
+Core.obj : error LNK2019: 未解決の外部シンボル _SDL_CreateWindow が関数 "public: __thiscall Core::Core(int,int)" (??0Core@@QAE@HH@Z) で参照されました。
+Core.obj : error LNK2019: 未解決の外部シンボル _SDL_DestroyWindow が関数 "public: __thiscall Core::~Core(void)" (??1Core@@QAE@XZ) で参照されました。
+Core.obj : error LNK2019: 未解決の外部シンボル _SDL_CreateRenderer が関数 "public: __thiscall Core::Core(int,int)" (??0Core@@QAE@HH@Z) で参照されました。
+Core.obj : error LNK2019: 未解決の外部シンボル _SDL_Init が関数 "public: __thiscall Core::Core(int,int)" (??0Core@@QAE@HH@Z) で参照されました。
+Core.obj : error LNK2019: 未解決の外部シンボル _SDL_Quit が関数 "public: __thiscall Core::~Core(void)" (??1Core@@QAE@XZ) で参照されました。
+Core.obj : error LNK2019: 未解決の外部シンボル _TTF_Init が関数 "public: __thiscall Core::Core(int,int)" (??0Core@@QAE@HH@Z) で参照されました。
+Core.obj : error LNK2019: 未解決の外部シンボル _TTF_OpenFont が関数 "public: __thiscall Core::Core(int,int)" (??0Core@@QAE@HH@Z) で参照されました。
+Core.obj : error LNK2019: 未解決の外部シンボル _TTF_CloseFont が関数 "public: __thiscall Core::~Core(void)" (??1Core@@QAE@XZ) で参照されました。
+Core.obj : error LNK2019: 未解決の外部シンボル _TTF_Quit が関数 "public: __thiscall Core::~Core(void)" (??1Core@@QAE@XZ) で参照されました。
+Fps.obj : error LNK2019: 未解決の外部シンボル _SDL_CreateTextureFromSurface が関数 "public: void __thiscall Fps::Draw(int,int,struct _TTF_Font *,struct SDL_Color,struct SDL_Renderer *)const " (?Draw@Fps@@QBEXHHPAU_TTF_Font@@USDL_Color@@PAUSDL_Renderer@@@Z) で参照されました。
+Image.obj : error LNK2001: 外部シンボル "_SDL_CreateTextureFromSurface" は未解決です。
+Map.obj : error LNK2001: 外部シンボル "_SDL_CreateTextureFromSurface" は未解決です。
+Fps.obj : error LNK2019: 未解決の外部シンボル _SDL_GetTicks が関数 "public: void __thiscall Fps::Update(void)" (?Update@Fps@@QAEXXZ) で参照されました。
+Fps.obj : error LNK2019: 未解決の外部シンボル _SDL_Delay が関数 "public: void __thiscall Fps::Wait(void)const " (?Wait@Fps@@QBEXXZ) で参照されました。
+Fps.obj : error LNK2019: 未解決の外部シンボル _TTF_RenderUTF8_Blended が関数 "public: void __thiscall Fps::Draw(int,int,struct _TTF_Font *,struct SDL_Color,struct SDL_Renderer *)const " (?Draw@Fps@@QBEXHHPAU_TTF_Font@@USDL_Color@@PAUSDL_Renderer@@@Z) で参照されました。
+Image.obj : error LNK2019: 未解決の外部シンボル _SDL_FreeSurface が関数 "public: __thiscall Image::Image(char const *,struct SDL_Renderer *)" (??0Image@@QAE@PBDPAUSDL_Renderer@@@Z) で参照されました。
+Map.obj : error LNK2001: 外部シンボル "_SDL_FreeSurface" は未解決です。
+Image.obj : error LNK2019: 未解決の外部シンボル _IMG_Load が関数 "public: __thiscall Image::Image(char const *,struct SDL_Renderer *)" (??0Image@@QAE@PBDPAUSDL_Renderer@@@Z) で参照されました。
+Map.obj : error LNK2001: 外部シンボル "_IMG_Load" は未解決です。
+main.obj : error LNK2019: 未解決の外部シンボル _SDL_RenderClear が関数 _SDL_main で参照されました。
+main.obj : error LNK2019: 未解決の外部シンボル _SDL_RenderPresent が関数 _SDL_main で参照されました。
+Player.obj : error LNK2019: 未解決の外部シンボル _SDL_PollEvent が関数 "public: void __thiscall Player::Key_Check(union SDL_Event,bool &,class Map &)" (?Key_Check@Player@@QAEXTSDL_Event@@AA_NAAVMap@@@Z) で参照されました。
+MSVCRTD.lib(exe_winmain.obj) : error LNK2019: 未解決の外部シンボル _WinMain@16 が関数 "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ) で参照されました。
+C:\Users\kotaro\VSproject\SDL2_Game\lib\x64\SDL2.lib : warning LNK4272: ライブラリのコンピューターの種類 'x64' がターゲットのコンピューターの種類' x86' と競合しています
+C:\Users\kotaro\VSproject\SDL2_Game\lib\x64\SDL2_image.lib : warning LNK4272: ライブラリのコンピューターの種類 'x64' がターゲットのコンピューターの種類' x86' と競合しています
+C:\Users\kotaro\VSproject\SDL2_Game\lib\x64\SDL2_mixer.lib : warning LNK4272: ライブラリのコンピューターの種類 'x64' がターゲットのコンピューターの種類' x86' と競合しています
+C:\Users\kotaro\VSproject\SDL2_Game\lib\x64\SDL2main.lib : warning LNK4272: ライブラリのコンピューターの種類 'x64' がターゲットのコンピューターの種類' x86' と競合しています
+C:\Users\kotaro\VSproject\SDL2_Game\lib\x64\SDL2test.lib : warning LNK4272: ライブラリのコンピューターの種類 'x64' がターゲットのコンピューターの種類' x86' と競合しています
+C:\Users\kotaro\VSproject\SDL2_Game\lib\x64\SDL2_ttf.lib : warning LNK4272: ライブラリのコンピューターの種類 'x64' がターゲットのコンピューターの種類' x86' と競合しています
+.\Debug\SDL2_Game.exe : fatal error LNK1120: 21 件の未解決の外部参照

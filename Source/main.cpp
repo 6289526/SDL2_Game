@@ -1,5 +1,5 @@
 #include "SDL2/SDL.h"
-#include "string"
+#include <string>
 
 #include "Core.h"
 #include "Fps.h"
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     Player player(core.Get_Renderer());  // プレイヤー
 
     // 敵の初期位置
-    SDL_Rect Enemy1_Position = { 400, 400, 800 * Enemy_Scale * 0.5, 1000 * Enemy_Scale * 0.5 };
+    SDL_Rect Enemy1_Position = { 400, 400, static_cast<int>(800 * Enemy_Scale * 0.5), static_cast<int>(1000 * Enemy_Scale * 0.5 )};
 
     Manage_Enemy enemy; // 敵情報
     // 適生成
@@ -28,13 +28,13 @@ int main(int argc, char* argv[]) {
 
     // エンドフラグが立つまで実行
     while (!core.m_Program_End) {
-      
+
         fps.Update();   // FPS 更新
-        
+
         SDL_RenderClear(core.Get_Renderer());   // 画面リセット
 
         player.Key_Check(core.Get_Event(), core.m_Program_End, map); // キー操作感知
-        
+
         map.Draw(core.Get_Renderer());  //  マップ描画
 
         // FPS値表示
@@ -59,4 +59,3 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-

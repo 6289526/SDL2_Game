@@ -1,0 +1,37 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(445,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Animation.cpp
+  Character.cpp
+  Core.cpp
+  Fps.cpp
+  Image.cpp
+  main.cpp
+  Map.cpp
+  Player.cpp
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(6,49): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(6,28): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(21,44): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(22,44): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+Animation.obj : error LNK2001: 外部シンボル "_SDL_RenderCopy" は未解決です。
+Animation.obj : error LNK2001: 外部シンボル "_SDL_RenderCopyEx" は未解決です。
+Animation.obj : error LNK2001: 外部シンボル "_SDL_FreeSurface" は未解決です。
+Animation.obj : error LNK2001: 外部シンボル "_IMG_Load" は未解決です。
+Animation.obj : error LNK2001: 外部シンボル "_SDL_CreateTextureFromSurface" は未解決です。
+Core.obj : error LNK2001: 外部シンボル "_SDL_Init" は未解決です。
+Core.obj : error LNK2001: 外部シンボル "_SDL_DestroyWindow" は未解決です。
+Core.obj : error LNK2001: 外部シンボル "_SDL_Quit" は未解決です。
+Core.obj : error LNK2001: 外部シンボル "_TTF_Init" は未解決です。
+Core.obj : error LNK2001: 外部シンボル "_TTF_CloseFont" は未解決です。
+Core.obj : error LNK2001: 外部シンボル "_TTF_OpenFont" は未解決です。
+Core.obj : error LNK2001: 外部シンボル "_SDL_CreateRenderer" は未解決です。
+Core.obj : error LNK2001: 外部シンボル "_SDL_CreateWindow" は未解決です。
+Core.obj : error LNK2001: 外部シンボル "_TTF_Quit" は未解決です。
+Fps.obj : error LNK2001: 外部シンボル "_SDL_Delay" は未解決です。
+Fps.obj : error LNK2001: 外部シンボル "_SDL_GetTicks" は未解決です。
+Fps.obj : error LNK2001: 外部シンボル "_TTF_RenderUTF8_Blended" は未解決です。
+main.obj : error LNK2001: 外部シンボル "_SDL_RenderClear" は未解決です。
+main.obj : error LNK2001: 外部シンボル "_SDL_RenderPresent" は未解決です。
+Player.obj : error LNK2001: 外部シンボル "_SDL_GetKeyboardState" は未解決です。
+Player.obj : error LNK2001: 外部シンボル "_SDL_GetMouseState" は未解決です。
+Player.obj : error LNK2001: 外部シンボル "_SDL_PollEvent" は未解決です。
+MSVCRT.lib(exe_winmain.obj) : error LNK2001: 外部シンボル "_WinMain@16" は未解決です。
+.\Release\SDL2_Game.exe : fatal error LNK1120: 23 件の未解決の外部参照

@@ -1,0 +1,20 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(445,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Character.cpp
+  Enemy.cpp
+  Manage_Enemy.cpp
+  Player.cpp
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(6,49): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(6,28): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(21,44): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(22,44): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(330,74): warning C4244: '+=': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(331,74): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(339,80): warning C4244: '+=': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\Player.cpp(340,80): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
+  main.cpp
+C:\Users\kotaro\VSproject\SDL2_Game\Source\main.cpp(21,62): warning C4838: 'double' から 'int' への変換には縮小変換が必要です
+C:\Users\kotaro\VSproject\SDL2_Game\Source\main.cpp(21,62): warning C4244: '初期化中': 'double' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\kotaro\VSproject\SDL2_Game\Source\main.cpp(21,88): warning C4838: 'double' から 'int' への変換には縮小変換が必要です
+C:\Users\kotaro\VSproject\SDL2_Game\Source\main.cpp(21,88): warning C4244: '初期化中': 'double' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+  SDL2_Game.vcxproj -> C:\Users\kotaro\VSproject\SDL2_Game\.\Debug\SDL2_Game.exe

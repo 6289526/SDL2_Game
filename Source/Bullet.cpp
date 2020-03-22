@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-#include "math.h"
+#include <cmath>
 
 #include "Core.h"
 
