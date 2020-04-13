@@ -71,8 +71,21 @@ void Character::Collision_Under(Map& map)
 		m_Gravity = m_Min_Gravity;
 	}
 
-	// ウィンドウ外に行くと「死」
-	if (m_Position.x <= 0 || Window_x < m_Position.x + m_Position.w || m_Position.y < 0 || Window_y < m_Position.y) {
+	// キャラがウィンドウ外に出たら「死」
+	// 左
+	if (m_Position.x + m_Position.w <= 0) {
+		m_HP = 0;
+	}
+	// 右
+	else if (Window_x <= m_Position.x) {
+		m_HP = 0;
+	}
+	// 下
+	else if (m_Position.y <= 0) {
+		m_HP = 0;
+	}
+	// 上
+	else if (Window_y <= m_Position.y + m_Position.h) {
 		m_HP = 0;
 	}
 }

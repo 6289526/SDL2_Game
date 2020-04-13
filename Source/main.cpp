@@ -9,7 +9,7 @@
 
 int main(int argc, char* argv[]) {
 
-    Core core(1024, 768);   // 基本的な情報
+    Core core(Window_x, Window_y);   // 基本的な情報
 
     Fps fps(60);    // FPS
 
@@ -18,13 +18,16 @@ int main(int argc, char* argv[]) {
     Player player(core.Get_Renderer());  // プレイヤー
 
     // 敵の初期位置
-    SDL_Rect Enemy1_Position = { 400, 400, static_cast<int>(800 * Enemy_Scale * 0.5), static_cast<int>(1000 * Enemy_Scale * 0.5 )};
+    SDL_Rect Enemy1_Position = { 400, 400, static_cast<int>(800 * Enemy_Scale * 0.5), static_cast<int>(1000 * Enemy_Scale * 0.5) };
+    SDL_Rect Enemy2_Position = { 200, 500, static_cast<int>(800 * Enemy_Scale * 0.7), static_cast<int>(1000 * Enemy_Scale * 0.3) };
 
     Manage_Enemy enemy; // 敵情報
     // 適生成
     enemy.Create_Enemy(core.Get_Renderer(), Enemy1_Position);
+    enemy.Create_Enemy(core.Get_Renderer(), Enemy2_Position);
     // 敵の移動速度を指定
     enemy.Get_Enemy(0)->Set_Speed(2);
+    enemy.Get_Enemy(1)->Set_Speed(1);
 
     // エンドフラグが立つまで実行
     while (!core.m_Program_End) {

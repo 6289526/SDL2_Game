@@ -44,6 +44,13 @@ int Map::Get_Height(int x) const
 {
 	x = (x - m_Floor_Information.x) / m_Floor_Information.w;
 
+	if (x < 0) {
+		x = 0;
+	}
+	else if (m_Floor_Length - 1 < x) {
+		x = m_Floor_Length - 1;
+	}
+
 	return m_Map[x];
 }
 

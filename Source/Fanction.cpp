@@ -30,6 +30,8 @@ void Print_Screen(const std::string& str, SDL_Renderer* renderer, int x, int y) 
 	SDL_Texture* t_Texture = SDL_CreateTextureFromSurface(renderer, t_Surface);
 
 	SDL_RenderCopy(renderer, t_Texture, nullptr, &t_Print_Rect);
+
+	TTF_CloseFont(t_Font);
 }
 
 std::string To_String(double num)
