@@ -1,9 +1,10 @@
 #include "Enemy.h"
 
-Enemy::Enemy(SDL_Renderer* renderer, SDL_Rect position)
+Enemy::Enemy(SDL_Renderer* renderer, SDL_Rect position, const char* image_path, int x_num, int y_num)
 	:	Character(position.x, position.y, position.w, position.h, Left),
-		m_Animation_Test("Image/Enemy/Enemy_Test.bmp", 3, 1, 800, 1000, renderer),
-		m_Speed(1)
+		m_Animation(image_path, x_num, y_num, 800, 1000, renderer),
+		m_Speed(1),
+		m_Draw_Adjustment(0)
 {
 }
 
@@ -15,12 +16,16 @@ void Enemy::Draw(SDL_Renderer* renderer, Map& map)
 
 	m_Position.x += map.Get_Move_Value();	// プレイヤーの移動分をずらす
 
+	m_Position.y += m_Draw_Adjustment;	// 描画位置を調整 画像ごとに違う
+
 	if (m_Direction == Right) {
-		m_Animation_Test.Draw(m_Position, renderer, 10);
+		m_Animation.Draw(m_Position, renderer, 10);
 	}
 	else if (m_Direction == Left) {
-		m_Animation_Test.Draw(m_Position, renderer, 10, true);
+		m_Animation.Draw(m_Position, renderer, 10, true);
 	}
+
+	m_Position.y -= m_Draw_Adjustment;	// 描画が終了したので戻す
 
 	// 下の当たり判定
 	Collision_Under(map);
@@ -34,11 +39,13 @@ void Enemy::Move(SDL_Rect position)
 	int t_Enemy_Position = m_Position.x + m_Position.w / 2;
 
 	// プレイヤがいる方向に移動する
-	if (t_Player_Position - t_Enemy_Position < 0) {
+	if (t_Player_Position < t_Enemy_Position) {
 		m_Position.x -= m_Speed;
+		m_Direction = Left;
 	}
-	else if (0 < t_Player_Position - t_Enemy_Position) {
+	else if (t_Enemy_Position < t_Player_Position) {
 		m_Position.x += m_Speed;
+		m_Direction = Right;
 	}
 }
 

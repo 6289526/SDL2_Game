@@ -9,11 +9,18 @@ Manage_Enemy::Manage_Enemy()
 }
 
 // “K¶¬
-int Manage_Enemy::Create_Enemy(SDL_Renderer* renderer, SDL_Rect position)
+int Manage_Enemy::Create_Enemy(SDL_Renderer* renderer, SDL_Rect position, Enemy_Type type)
 {
 	for (int i = 0; i < Enemy_Num; ++i) {
 		if (m_Enemy[i] == nullptr) {
-			m_Enemy[i] = new Enemy(renderer, position);
+			if (type == Test) {
+				m_Enemy[i] = new Enemy(renderer, position, "Image/Enemy/Enemy_Test.bmp", 4, 1);
+			}
+			else if (type == Leg) {
+				m_Enemy[i] = new Enemy(renderer, position, "Image/Enemy/Enemy1_Walk.bmp", 3, 2);
+				m_Enemy[i]->m_Draw_Adjustment = 20;	// •\¦‚Ìã‰º‚Ì’²®
+			}
+			
 			return i;
 		}
 	}

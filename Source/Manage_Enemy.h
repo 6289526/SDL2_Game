@@ -4,13 +4,20 @@
 
 const int Enemy_Num = 3;	// 画面内の敵キャラの数の最大値
 
+enum Enemy_Type {
+	Test,
+	Leg,
+	Wheel,
+	Fly,
+};
+
 class Manage_Enemy
 {
 public:
 	/* (レンダラ) */
 	Manage_Enemy();
-	/* (レンダラ，初期位置) */
-	int Create_Enemy(SDL_Renderer* renderer, SDL_Rect position);
+	/* (レンダラ，初期位置，キャラの種類) */
+	int Create_Enemy(SDL_Renderer* renderer, SDL_Rect position, Enemy_Type type);
 	/* (レンダラ，マップ) */
 	void Draw(SDL_Renderer* renderer, Map& map);
 	/* (移動目標の座標) */

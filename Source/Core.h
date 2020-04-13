@@ -10,7 +10,7 @@ const int Window_x = 1024;	// ウィンドウの幅
 const int Window_y =  768;	// ウィンドウの高さ
 
 const double Player_Scale = 0.2;	// プレイヤー画像の縮小率
-const double Enemy_Scale = 0.2;	// 敵キャラの縮小率
+const double Enemy_Scale = 0.15;	// 敵キャラの縮小率
 
 // キャラの向き
 enum Direction {
