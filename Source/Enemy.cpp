@@ -19,10 +19,10 @@ void Enemy::Draw(SDL_Renderer* renderer, Map& map)
 	m_Position.y += m_Draw_Adjustment;	// •`‰æˆÊ’u‚ğ’²® ‰æ‘œ‚²‚Æ‚Éˆá‚¤
 
 	if (m_Direction == Right) {
-		m_Animation.Draw(m_Position, renderer, 10);
+		m_Animation.Draw(m_Position, renderer, 5);
 	}
 	else if (m_Direction == Left) {
-		m_Animation.Draw(m_Position, renderer, 10, true);
+		m_Animation.Draw(m_Position, renderer, 5, true);
 	}
 
 	m_Position.y -= m_Draw_Adjustment;	// •`‰æ‚ªI—¹‚µ‚½‚Ì‚Å–ß‚·

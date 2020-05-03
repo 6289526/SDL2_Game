@@ -1,3 +1,28 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(445,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  Animation.cpp
+  Bullet.cpp
+E:\VSproject\SDL2_Game\Source\Bullet.cpp(33,29): warning C4244: '+=': 'const double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Bullet.cpp(34,29): warning C4244: '-=': 'const double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Bullet.cpp(38,29): warning C4244: '+=': 'const double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Bullet.cpp(39,29): warning C4244: '-=': 'const double' から 'int' への変換です。データが失われる可能性があります。
+  Character.cpp
+  Core.cpp
   Enemy.cpp
-  SDL2_Game.vcxproj -> C:\Users\kotaro\VSproject\SDL2_Game\.\Debug\SDL2_Game.exe
+  Fanction.cpp
+  Fps.cpp
+  Image.cpp
+  main.cpp
+  Manage_Enemy.cpp
+  Map.cpp
+  Player.cpp
+E:\VSproject\SDL2_Game\Source\Player.cpp(6,49): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Player.cpp(6,28): warning C4244: '引数': 'double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Player.cpp(21,44): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Player.cpp(22,44): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Player.cpp(330,74): warning C4244: '+=': 'double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Player.cpp(331,74): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Player.cpp(339,80): warning C4244: '+=': 'double' から 'int' への変換です。データが失われる可能性があります。
+E:\VSproject\SDL2_Game\Source\Player.cpp(340,80): warning C4244: '-=': 'double' から 'int' への変換です。データが失われる可能性があります。
+  コードを生成中...
+  LINK : 前回のインクリメンタル リンクで .\Debug\SDL2_Game.exe が見つからなかったか、ビルドされませんでした。フル リンクを行います。
+  SDL2_Game.vcxproj -> E:\VSproject\SDL2_Game\.\Debug\SDL2_Game.exe
